@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var { Category } = require('../models/Category');
+var { Ingredient } = require('../models/Ingredient');
 
-/* GET categories listing. */
+/* GET  listing. */
 router.get("/", async (req, res, next) => {
     try {
-        const allCategories = await Category.find();
-        res.send(allCategories);
+        const all = await Ingredient.find();
+        res.send(all);
     } catch (err) {
         next(err);
     }
@@ -15,8 +15,8 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        const category = await Category.findById(id);
-        res.send(category);
+        const ingredient = await Ingredient.findById(id);
+        res.send(ingredient);
     } catch (err) {
         next(err);
     }
@@ -24,9 +24,9 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
     try {
-        const newCategory = new Category({ ...req.body });
-        const insertedCategory = await newCategory.save();
-        res.send(insertedCategory);
+        const newIngredient = new Ingredient({ ...req.body });
+        const insertedIngredient = await newIngredient.save();
+        res.send(insertedIngredient);
     } catch (err) {
         next(err);
     }
@@ -35,9 +35,9 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        await Category.updateOne({ _id: id }, req.body);
-        const updatedCategory = await Category.findById(id);
-        res.send(updatedCategory);
+        await Ingredient.updateOne({ _id: id }, req.body);
+        const updatedIngredient = await Ingredient.findById(id);
+        res.send(updatedIngredient);
     } catch (err) {
         next(err);
     }
@@ -46,8 +46,8 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        const deletedCategory = await Category.findByIdAndDelete(id);
-        res.send(deletedCategory);
+        const deletedIngredient = await Ingredient.findByIdAndDelete(id);
+        res.send(deletedIngredient);
     } catch (err) {
         next(err);
     }
