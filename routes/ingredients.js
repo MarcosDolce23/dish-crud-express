@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var { Ingredient } = require('../models/Ingredient');
 
-/* GET  listing. */
+/* GET ingredients listing. */
 router.get("/", async (req, res, next) => {
     try {
         const all = await Ingredient.find();
@@ -52,3 +52,5 @@ router.delete("/:id", async (req, res, next) => {
         next(err);
     }
 });
+
+module.exports = router;
