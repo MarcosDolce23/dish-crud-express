@@ -6,7 +6,18 @@ var { Dish } = require('../models/Dish');
 router.get('/', async function (req, res, next) {
   try {
     const allDishes = await Dish.find();
-    res.send(allDishes);
+    res.send(allDishes.sort((a, b) => {
+      let fa = a.esName.toLocaleLowerCase(),
+        fb = b.esName.toLocaleLowerCase();
+
+      if (fa < fb) {
+        return -1;
+      }
+      if (fa > fb) {
+        return 1;
+      }
+      return 0;
+    }));
   } catch (err) {
     next(err);
   }

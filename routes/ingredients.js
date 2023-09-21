@@ -5,8 +5,19 @@ var { Ingredient } = require('../models/Ingredient');
 /* GET ingredients listing. */
 router.get("/", async (req, res, next) => {
     try {
-        const all = await Ingredient.find();
-        res.send(all);
+        const allIngredients = await Ingredient.find();
+        res.send(allIngredients.sort((a, b) => {
+            let fa = a.esName.toLocaleLowerCase(),
+                fb = b.esName.toLocaleLowerCase();
+            
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        }));
     } catch (err) {
         next(err);
     }

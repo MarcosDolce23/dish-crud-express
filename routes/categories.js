@@ -6,7 +6,18 @@ var { Category } = require('../models/Category');
 router.get("/", async (req, res, next) => {
     try {
         const allCategories = await Category.find();
-        res.send(allCategories);
+        res.send(allCategories.sort((a, b) => {
+            let fa = a.esName.toLocaleLowerCase(),
+                fb = b.esName.toLocaleLowerCase();
+
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        }));
     } catch (err) {
         next(err);
     }
