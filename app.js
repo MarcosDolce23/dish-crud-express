@@ -48,7 +48,7 @@ app.use(function(err, req, res, next) {
 // mongoose.connect('mongodb://127.0.0.1:27017/reactdb')
 //   .then(() => console.log('MongoDB Conected!'));
 
-mongoose.connect('mongodb+srv://marcosdolce91:x73GtOZ9Tckse2AM@cluster0.jusregc.mongodb.net/')
+mongoose.connect(process.env.dbURI)
   .then(() => console.log('MongoDB Conected!'));
 
 module.exports = app;
