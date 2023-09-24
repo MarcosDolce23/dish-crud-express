@@ -4,7 +4,6 @@ var { User } = require('../models/User');
 
 router.post("/", async (req, res, next) => {
     try {
-        console.log(req.body);
         const user = await User.find({ user: req.body.user, password: req.body.password });
         res.send(user);
     } catch (err) {
