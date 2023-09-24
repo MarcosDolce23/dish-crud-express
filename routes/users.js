@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 var { User } = require('../models/User');
 
-router.get("/", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     try {
+        console.log(req.body);
         const user = await User.find({ user: req.body.user, password: req.body.password });
         res.send(user);
     } catch (err) {
