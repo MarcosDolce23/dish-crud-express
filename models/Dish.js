@@ -22,6 +22,12 @@ let DishSchema = new mongoose.Schema({
   ingredients: {
     type: Array,
   },
+  esQuantities: {
+    type: Array,
+  },
+  enQuantities: {
+    type: Array,
+  },
   esRecipe: {
     type: Array,
   },
